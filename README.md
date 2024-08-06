@@ -75,3 +75,6 @@ If these folders are missing, the structure was not created correctly. Correct t
 ## Todos
 - Cleanly document the code
 - Create `delete_junctions.ps1` script
+
+## Important
+The scripts and instructions were created using ChatGPT
