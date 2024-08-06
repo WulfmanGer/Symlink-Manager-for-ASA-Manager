@@ -9,6 +9,9 @@ This script allows the migration of ARK servers managed by the ASA Manager to a 
 - **Reduced Storage Usage**: An ARK server occupies about 12 GB of space. Without junctions, each server requires 12 GB. With 6 servers, that’s 72 GB. Using junctions, all 6 servers together use only 12 GB (plus savegames, backups, etc.).
 - **Faster Updates**: Only one update is needed to bring all servers up to date.
 - **Faster Server Start**: Mods are downloaded during the startup process. Once one server is started, the others do not need to download the mod updates again.
+- **Updates do not cause high data transfer**: 6 servers = 12Gbyte instead of 72Gbyte.
+- **fewer write accesses during updates**
+- **The OS can possibly cache accesses to the server and thus start faster**
 
 ## Requirements
 
