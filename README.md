@@ -19,7 +19,7 @@ This script allows the migration of ARK servers managed by the ASA Manager to a 
 - Windows PowerShell (Version 5.0 or higher)
 - NTFS file system
 - Permissions to create junctions/symlinks (administrator rights or equivalent permissions)
-- **IMPORTANT**: The servers managed by the ASA Manager must all be in a separate directory (no other directories should be present) - see the "Server Structure" section below.
+- **IMPORTANT**: The servers managed by the ASA Manager must all be in a separate directory (no other directories should be present) - see the "[Server Structure](#Server Structure)" section below.
 
 ## Included Scripts
 
