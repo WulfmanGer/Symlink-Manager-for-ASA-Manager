@@ -1,70 +1,68 @@
-**Hinweis: Vor der Umstellung ein Backup aller Server erstellen!**
-
 # Symlink Manager for ASA Manager
 
-Dieses Skript ermöglicht die Migration von ARK-Servern des ASA Managers zu einer Struktur mit Junctions/Symlinks.
+**Note: Create a backup of all servers before making changes!**
 
-## Wofür brauche ich das?
+This script allows the migration of ARK servers managed by the ASA Manager to a structure using junctions/symlinks.
 
-- **Reduzierung des Speicherbedarfs**: Ein ARK-Server belegt ca. 12 GB Speicherplatz. Ohne Junctions benötigt jeder Server diese 12 GB. Bei 6 Servern wären das 72 GB. Mit Junctions belegen alle 6 Server zusammen nur noch 12 GB (zuzüglich Savegames, Backups usw.).
-- **Schnellere Updates**: Es muss nur ein Update durchgeführt werden, und alle Server sind auf dem neuesten Stand.
-- **Schnelleres Starten der Server**: Mods werden während des Startvorgangs heruntergeladen. Wenn ein Server gestartet wurde, müssen die anderen Server die Mod-Updates nicht erneut herunterladen.
+## Why do I need this?
 
-## Anforderungen
+- **Reduced Storage Usage**: An ARK server occupies about 12 GB of space. Without junctions, each server requires 12 GB. With 6 servers, that’s 72 GB. Using junctions, all 6 servers together use only 12 GB (plus savegames, backups, etc.).
+- **Faster Updates**: Only one update is needed to bring all servers up to date.
+- **Faster Server Start**: Mods are downloaded during the startup process. Once one server is started, the others do not need to download the mod updates again.
+
+## Requirements
 
 - ASA (Dedicated Server) Manager (Version ...)
-- Windows PowerShell (Version 5.0 oder höher)
-- NTFS-Dateisystem
-- Berechtigungen zum Erstellen von Junctions/Symlinks (Administratorrechte oder entsprechende Berechtigungen)
-- **WICHTIG**: Die vom ASA Manager verwalteten Server müssen alle in einem separaten Verzeichnis liegen (es dürfen keine anderen Verzeichnisse vorhanden sein) - siehe dazu den Nachtrag "Serverstruktur" unten
+- Windows PowerShell (Version 5.0 or higher)
+- NTFS file system
+- Permissions to create junctions/symlinks (administrator rights or equivalent permissions)
+- **IMPORTANT**: The servers managed by the ASA Manager must all be in a separate directory (no other directories should be present) - see the "Server Structure" section below.
 
+## Included Scripts
 
-## Welche Scripte sind enthalten
+- `migration.ps1` - Migrates from the normal directory structure to the junctions structure.
+- `check_migration.ps1` - Checks if the prerequisites are met and if the current user can create junctions.
+- `delete_junctions.ps1` (planned) - Restores the original state (checks disk capacity).
 
-- `migration.ps1` - Migriert von der normalen Verzeichnisstruktur zur Junctions-Struktur
-- `check_migration.ps1` - Überprüft, ob die Voraussetzungen erfüllt sind und ob der aktuelle Benutzer Junctions erstellen kann
-- `delete_junctions.ps1` (in Planung) - Stellt den Ursprungszustand wieder her (prüft die Datenträgerkapazität)
+## Usage
 
+1. Copy the files `migration.ps1`, `check_migration.ps1`, and `delete_junctions.ps1` to the directory where the ARK servers are installed.
+2. Open a PowerShell console (Windows Start button -> Type "PowerShell" -> Start Windows PowerShell).
+3. Navigate to the directory containing the servers/maps (see "Server Structure" below).
+4. Check if the migration is possible: `./check_migration.ps1`. If the test is successful:
+5. Run the migration script: `./migration.ps1`.
+6. Choose the desired option:
+   - (a) Migrate all servers:
+     - Select a starting server. It is recommended to choose the server with the most/largest mods.
+     - A new directory "CoreServer" will be created, and the selected server will be copied there (without savegames, etc.).
+     - The server files of the other servers/maps will be deleted and replaced by junctions.
+   - (b) Migrate a new server:
+     - Prerequisite: A CoreServer must already exist.
+     - Select the directory of the new server.
+     - The migration is performed by deleting the server files and replacing them with junctions. Already migrated servers will be skipped.
 
-## Anwendung
+**Note:** The CoreServer is NOT directly managed by the ASA Manager. Updates occur within it, but the ASA Manager is not aware of this. The CoreServer allows you to delete and recreate all existing maps with junctions without accidentally deleting the CoreServer.
 
-1. Kopiere die Dateien `migration.ps1`, `check_migration.ps1` und `delete_junctions.ps1` in das Verzeichnis, in dem die ARK-Server installiert sind.
-2. Öffne eine PowerShell-Konsole (Windows Startbutton -> PowerShell eingeben -> Windows PowerShell starten).
-3. Wechsel in das Verzeichnis der Server/Maps (siehe "Serverstruktur" unten).
-4. Prüfe, ob die Migration möglich ist: `./check_migration.ps1`. Wenn der Test erfolgreich ist:
-5. Führe das Migrationsskript aus: `./migration.ps1`.
-6. Wähle die gewünschte Option:
-   - (a) Migration aller Server:
-     - Wähle einen Startserver aus. Es empfiehlt sich, den Server mit den meisten/größten Mods zu nehmen.
-     - Ein neues Verzeichnis "CoreServer" wird erstellt und der ausgewählte Server wird dorthin kopiert (ohne Savegames etc.).
-     - Die Serverdateien der anderen Server/Maps werden gelöscht und durch Junctions ersetzt.
-   - (b) Migration eines neuen Servers:
-     - Voraussetzung: Ein CoreServer muss bereits existieren.
-     - Wähle das Verzeichnis des neuen Servers aus.
-     - Die Migration wird durchgeführt, indem die Serverdateien gelöscht und durch Junctions ersetzt werden. Bereits migrierte Server werden übersprungen.
+To undo the migration, use the script `delete_junctions.ps1` (in progress).
 
-**Hinweis:** Der CoreServer wird NICHT direkt vom ASA Manager verwaltet. Updates erfolgen darin, aber der ASA Manager "weiß" das nicht. Der CoreServer ermöglicht es, alle bestehenden Maps zu löschen und mit Junctions neu zu erstellen, ohne den CoreServer versehentlich zu löschen.
+## Appendix
 
-Für die Rückgängigmachung der Migration nutze das Skript `delete_junctions.ps1` (in Arbeit).
+### Server Structure
 
+The script assumes a specific server structure. The name of the main directory does not matter, but the structure below it is important. Ensure the structure is correct. Use the ASA Manager if necessary to move or rename servers. Avoid special characters or spaces in the path.
 
-## Nachtrag
+Example structure:
+- `c:\GameServer\Ark_ASA_Manager\` # Main directory (the ASA Manager itself)
+- `c:\GameServer\Maps\` # Main directory for the servers (this is where the scripts go)
+- `c:\GameServer\Maps\TheIsland\` # Directory for a server/map (each server has its own directory)
 
-### Serverstruktur
+Additional servers/maps:
+- `c:\GameServer\Maps\TheCenter\`
+- `c:\GameServer\Maps\Aberration\`
+- `c:\GameServer\Maps\ScorchedEarth\`
+- `c:\GameServer\Maps\Svartfalheim\`
 
-Das Skript setzt eine bestimmte Serverstruktur voraus. Der Name des Hauptverzeichnisses ist egal, aber der Aufbau darunter ist wichtig. Stellen Sie sicher, dass die Struktur korrekt ist. Nutzen Sie gegebenenfalls den ASA Manager, um die Server zu verschieben oder umzubenennen. Vermeiden Sie Sonderzeichen oder Leerzeichen im Pfad.
-
-Beispielstruktur:
-- c:\GameServer\Ark_ASA_Manager\ # Hauptverzeichnis (der ASA Manager selbst)
-- c:\GameServer\Maps\ # Hauptverzeichnis für die Server (hier kommen die Skripte rein)
-- c:\GameServer\Maps\TheIsland\ # Verzeichnis für einen Server/Map (jedem Server ein eigenes Verzeichnis)
-Weitere Server/Maps:
-- c:\GameServer\Maps\TheCenter\
-- c:\GameServer\Maps\Aberration\
-- c:\GameServer\Maps\ScorchedEarth\
-- c:\GameServer\Maps\Svartfalheim\
-
-In jedem Serververzeichnis (z.B. `TheIsland`) sollten die folgenden Unterverzeichnisse vorhanden sein:
+Each server directory (e.g., `TheIsland`) should contain the following subdirectories:
 - `Engine`
 - `steamapps`
 - `steamcmd`
@@ -72,8 +70,8 @@ In jedem Serververzeichnis (z.B. `TheIsland`) sollten die folgenden Unterverzeic
 - `ShooterGame\Content`
 - `ShooterGame\Plugins`
 
-Wenn diese Ordner fehlen, wurde die Struktur nicht korrekt erstellt. Korrigieren Sie dies mit dem ASA Manager.
+If these folders are missing, the structure was not created correctly. Correct this with the ASA Manager.
 
 ## Todos
-- Code sauber dokumentieren
-- `delete_junctions.ps1`-Skript erstellen
+- Cleanly document the code
+- Create `delete_junctions.ps1` script
