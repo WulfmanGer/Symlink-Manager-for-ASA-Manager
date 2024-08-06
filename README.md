@@ -45,6 +45,10 @@ This script allows the migration of ARK servers managed by the ASA Manager to a 
 
 To undo the migration, use the script `delete_junctions.ps1` (in progress).
 
+## Future server updates
+In the future, you will need to shut down all servers in the ASA Manager and update only one (migrated) server. After the update, you can restart the desired servers.
+**Important**: The version display in the ASA Manager will only update for each server after it has been started.
+
 ## Appendix
 
 ### Server Structure
