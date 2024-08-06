@@ -45,6 +45,10 @@ Dieses Skript ermöglicht die Migration von ARK-Servern des ASA Managers zu eine
 
 Für die Rückgängigmachung der Migration nutze das Skript `delete_junctions.ps1` (in Arbeit).
 
+## Künftige Serverupdates
+Ihr müsst im ASA Manager künftig alle Server runterfahren und einen beliebigen, migrierten, updaten. Danach könnt ihr die gewünschten Server wieder starten. 
+**Wichtig**: die Versionsanzeige im ASA Manager ändert sich je Server erst wenn dieser mal gestartet wurde.
+
 ## Nachtrag
 
 ### Serverstruktur
