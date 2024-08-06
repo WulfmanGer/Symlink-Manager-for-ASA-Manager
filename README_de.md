@@ -12,7 +12,7 @@ Dieses Skript ermöglicht die Migration von ARK-Servern des ASA Managers zu eine
 
 ## Anforderungen
 
-- ASA (Dedicated Server) Manager (Version ...)
+- ASA (Dedicated Server) Manager (https://asadedicatedmanager.eu/)
 - Windows PowerShell (Version 5.0 oder höher)
 - NTFS-Dateisystem
 - Berechtigungen zum Erstellen von Junctions/Symlinks (Administratorrechte oder entsprechende Berechtigungen)
