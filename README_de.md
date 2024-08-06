@@ -9,6 +9,9 @@ Dieses Skript ermöglicht die Migration von ARK-Servern des ASA Managers zu eine
 - **Reduzierung des Speicherbedarfs**: Ein ARK-Server belegt ca. 12 GB Speicherplatz. Ohne Junctions benötigt jeder Server diese 12 GB. Bei 6 Servern wären das 72 GB. Mit Junctions belegen alle 6 Server zusammen nur noch 12 GB (zuzüglich Savegames, Backups usw.).
 - **Schnellere Updates**: Es muss nur ein Update durchgeführt werden, und alle Server sind auf dem neuesten Stand.
 - **Schnelleres Starten der Server**: Mods werden während des Startvorgangs heruntergeladen. Wenn ein Server gestartet wurde, müssen die anderen Server die Mod-Updates nicht erneut herunterladen.
+- **Updates verursachen keinen hohen Datentranfert**: 6 Server = 12Gbyte statt 72Gbyte.
+- **weniger Schreibzugriffe bei Updates**
+- **Das OS kann Zugriffe auf den Server evtl. Cachen und somit schneller starten**
 
 ## Anforderungen
 
