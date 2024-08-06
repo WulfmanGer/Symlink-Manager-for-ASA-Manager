@@ -75,3 +75,6 @@ Wenn diese Ordner fehlen, wurde die Struktur nicht korrekt erstellt. Korrigieren
 ## Todos
 - Code sauber dokumentieren
 - `delete_junctions.ps1`-Skript erstellen
+
+## Wichtig
+- Die Scripte und die Anleitung wurden mit hilfe von ChatGPT erstellt
