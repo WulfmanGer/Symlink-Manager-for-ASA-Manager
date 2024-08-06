@@ -55,14 +55,14 @@ Für die Rückgängigmachung der Migration nutze das Skript `delete_junctions.ps
 Das Skript setzt eine bestimmte Serverstruktur voraus. Der Name des Hauptverzeichnisses ist egal, aber der Aufbau darunter ist wichtig. Stellen Sie sicher, dass die Struktur korrekt ist. Nutzen Sie gegebenenfalls den ASA Manager, um die Server zu verschieben oder umzubenennen. Vermeiden Sie Sonderzeichen oder Leerzeichen im Pfad.
 
 Beispielstruktur:
-c:\GameServer\Ark_ASA_Manager\ # Hauptverzeichnis (der ASA Manager selbst)
-c:\GameServer\Maps\ # Hauptverzeichnis für die Server (hier kommen die Skripte rein)
-c:\GameServer\Maps\TheIsland\ # Verzeichnis für einen Server/Map (jedem Server ein eigenes Verzeichnis)
+- c:\GameServer\Ark_ASA_Manager\ # Hauptverzeichnis (der ASA Manager selbst)
+- c:\GameServer\Maps\ # Hauptverzeichnis für die Server (hier kommen die Skripte rein)
+- c:\GameServer\Maps\TheIsland\ # Verzeichnis für einen Server/Map (jedem Server ein eigenes Verzeichnis)
 Weitere Server/Maps:
-c:\GameServer\Maps\TheCenter\
-c:\GameServer\Maps\Aberration\
-c:\GameServer\Maps\ScorchedEarth\
-c:\GameServer\Maps\Svartfalheim\
+- c:\GameServer\Maps\TheCenter\
+- c:\GameServer\Maps\Aberration\
+- c:\GameServer\Maps\ScorchedEarth\
+- c:\GameServer\Maps\Svartfalheim\
 
 In jedem Serververzeichnis (z.B. `TheIsland`) sollten die folgenden Unterverzeichnisse vorhanden sein:
 - `Engine`
