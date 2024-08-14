@@ -69,6 +69,10 @@ Additional servers/maps:
 - `c:\GameServer\Maps\ScorchedEarth\`
 - `c:\GameServer\Maps\Svartfalheim\`
 
+Wrong:
+- `c:\GameServer\Maps\TheCenter\TheCenter\`
+- `c:\GameServer\Maps\Aberration\Aberration\`
+
 Each server directory (e.g., `TheIsland`) should contain the following subdirectories:
 - `Engine`
 - `steamapps`
@@ -84,4 +88,4 @@ If these folders are missing, the structure was not created correctly. Correct t
 - Create `delete_junctions.ps1` script
 
 ## Important
-The scripts and instructions were created using ChatGPT
+The script and instructions were developed with the kind support of ChatGPT.
